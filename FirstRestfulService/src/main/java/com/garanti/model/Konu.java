@@ -1,28 +1,32 @@
 package com.garanti.model;
 
-public class Konu
-{
+public class Konu {
     private Integer ID;
-
     // aman dikkat repoda boş gelmesin
     private String NAME;
 
-    public Integer getID() {
-        return ID;
+    public Konu() {
     }
-
-    public String getNAME() {
-        return NAME;
+    public Konu(String NAME) {
+        this.NAME = NAME;
     }
-
-    public Konu(Integer ID, String NAME)
-    {
+    public Konu(Integer ID, String NAME) {
         this.ID = ID;
         this.NAME = NAME;
     }
 
-    public Konu(String NAME)
-    {
+
+    public Integer getID() {
+        return ID;
+    }
+    public String getNAME() {
+        return NAME;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+    public void setNAME(String NAME) {
         this.NAME = NAME;
     }
 
