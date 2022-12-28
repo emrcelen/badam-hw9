@@ -3,7 +3,9 @@ package com.garanti.endpoints;
 import com.garanti.model.Ogrenci;
 import com.garanti.repo.OgrenciRepo;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -50,6 +52,22 @@ public class OgrenciEndpoints {
     public String save(Ogrenci ogrenci){
         this.ogrenciRepo.save(ogrenci);
         return "Başarılı bir şekilde öğrenci kaydı oluşturuldu.";
+    }
+    // localhost:9090/FirstRestfulService/ogrenci/deleteById/id
+    @DELETE
+    @Path(value = "deleteById/{id}")
+    public String deleteById(@PathParam(value = "id") int id){
+        if(ogrenciRepo.deleteById(id))
+            return "Başarılı bir şekilde silme işlemini gerçekleştirdi.";
+        return "Silme işlemi gerçekleştirilemedi.";
+    }
+    // localhost:9090/FirstRestfulService/ogrenci/deleteById/
+    @DELETE
+    @Path(value = "deleteById")
+    public String deleteByHeaderId(@HeaderParam(value = "id") int id){
+        if(ogrenciRepo.deleteById(id))
+            return "Başarılı bir şekilde silme işlemini gerçekleştirdi.";
+        return "Silme işlemi gerçekleştirilemedi.";
     }
 
 }
