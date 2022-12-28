@@ -3,7 +3,9 @@ package com.garanti.endpoints;
 import com.garanti.model.Ders_Ogrenci;
 import com.garanti.repo.Ders_OgrenciRepo;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -48,5 +50,21 @@ public class DogrEndpoints {
     public String save(Ders_Ogrenci ders_ogrenci){
         this.dogrRepo.save(ders_ogrenci);
         return "Ders_Öğrenci Kaydı Başarılı Bir Şekilde Gerçekleşti.";
+    }
+    // localhost:9090/FirstRestfulService/dogr/deleteById/id
+    @DELETE
+    @Path(value = "deleteById/{id}")
+    public String deleteById(@PathParam(value = "id") int id){
+        if(dogrRepo.deleteById(id))
+            return "Başarılı bir şekilde silme işlemini gerçekleştirdi.";
+        return "Silme işlemi gerçekleştirilemedi.";
+    }
+    // localhost:9090/FirstRestfulService/dogr/deleteById/
+    @DELETE
+    @Path(value = "deleteById")
+    public String deleteByHeaderId(@HeaderParam(value = "id") int id){
+        if(dogrRepo.deleteById(id))
+            return "Başarılı bir şekilde silme işlemini gerçekleştirdi.";
+        return "Silme işlemi gerçekleştirilemedi.";
     }
 }
