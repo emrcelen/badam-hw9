@@ -3,7 +3,9 @@ package com.garanti.endpoints;
 import com.garanti.model.Ders;
 import com.garanti.repo.DersRepo;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -49,5 +51,21 @@ public class DersEndpoints {
     public String save(Ders ders){
         this.dersRepo.save(ders);
         return "Başarılı bir şekilde ders kaydı gerçekleşti.";
+    }
+    // localhost:9090/FirstRestfulService/ders/deleteById/id
+    @DELETE
+    @Path(value = "deleteById/{id}")
+    public String deleteById(@PathParam(value = "id") int id){
+        if(dersRepo.deleteById(id))
+            return "Başarılı bir şekilde silme işlemini gerçekleştirdi.";
+        return "Silme işlemi gerçekleştirilemedi.";
+    }
+    // localhost:9090/FirstRestfulService/ders/deleteById/
+    @DELETE
+    @Path(value = "deleteById")
+    public String deleteByHeaderId(@HeaderParam(value = "id") int id){
+        if(dersRepo.deleteById(id))
+            return "Başarılı bir şekilde silme işlemini gerçekleştirdi.";
+        return "Silme işlemi gerçekleştirilemedi.";
     }
 }
