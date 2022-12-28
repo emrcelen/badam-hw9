@@ -3,7 +3,9 @@ package com.garanti.endpoints;
 import com.garanti.model.Konu;
 import com.garanti.repo.KonuRepo;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -48,5 +50,22 @@ public class KonuEndpoints {
     public String save(Konu konu){
         this.konuRepo.save(konu);
         return "Başarılı bir şekilde konu kaydı gerçekleştirildi.";
+    }
+
+    // localhost:9090/FirstRestfulService/konu/deleteById/id
+    @DELETE
+    @Path(value = "deleteById/{id}")
+    public String deleteById(@PathParam(value = "id") int id){
+        if(konuRepo.deleteById(id))
+            return "Başarılı bir şekilde silme işlemini gerçekleştirdi.";
+        return "Silme işlemi gerçekleştirilemedi.";
+    }
+    // localhost:9090/FirstRestfulService/konu/deleteById/
+    @DELETE
+    @Path(value = "deleteById")
+    public String deleteByHeaderId(@HeaderParam(value = "id") int id){
+        if(konuRepo.deleteById(id))
+            return "Başarılı bir şekilde silme işlemini gerçekleştirdi.";
+        return "Silme işlemi gerçekleştirilemedi.";
     }
 }
